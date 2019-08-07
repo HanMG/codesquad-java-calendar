@@ -1,5 +1,5 @@
 /*
- *  코드스쿼드 캘린더 만들기 println 사용해서 출력하기.
+ *  코드스쿼드 캘린더 만들기 반복입력 가능하도록 프로그램 변경.
  */
 package honux.calendar;
 import java.util.Scanner;
@@ -27,12 +27,21 @@ public class Calendar
 		//숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
 		Scanner scan = new Scanner(System.in);
 		Calendar cal = new Calendar();
-		int inputMonth = 0 ;  	
-		System.out.println("달을 입력하세요.");
-		inputMonth = scan.nextInt();		
+		int inputMonth = 0 ;	
+		int inputTimes = 0;
+		System.out.printf("몇 번 실행할 지 숫자를 입력해주세요 : ");
+		inputTimes = scan.nextInt();
 		
-		System.out.printf("%d월은 %d일까지 있습니다. \n\n", inputMonth, cal.getMaxDaysOfMonth(inputMonth));
-		cal.printSampleCalendar();
+		for(int i = 0; i < inputTimes; i++)
+		{
+			System.out.printf("달을 입력하세요 : ");
+			inputMonth = scan.nextInt();		
+			
+			System.out.printf("%d월은 %d일까지 있습니다. \n\n", inputMonth, cal.getMaxDaysOfMonth(inputMonth));
+		};
+		System.out.println("출력완료");
+		
+		//cal.printSampleCalendar();
 		scan.close();		
 	}
 
