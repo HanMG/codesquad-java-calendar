@@ -1,5 +1,5 @@
 /*
- *  코드스쿼드 캘린더 만들기 반복입력 가능하도록 프로그램 변경.
+ *  코드스쿼드 캘린더 만들기 무한입력 1~12사이가 아닐경우 예외
  */
 package honux.calendar;
 import java.util.Scanner;
@@ -27,17 +27,30 @@ public class Calendar
 		//숫자를 입력받아 해당하는 달의 최대 일수를 출력하는 프로그램
 		Scanner scan = new Scanner(System.in);
 		Calendar cal = new Calendar();
+		String PROMPT = "cal> ";
 		int inputMonth = 0 ;	
 		int inputTimes = 0;
-		System.out.printf("몇 번 실행할 지 숫자를 입력해주세요 : ");
-		inputTimes = scan.nextInt();
+		/*
+		 * System.out.printf("몇 번 실행할 지 숫자를 입력해주세요 : ");
+		 * 
+		 * inputTimes = scan.nextInt();
+		 */	
 		
-		for(int i = 0; i < inputTimes; i++)
+		while (true)
 		{
-			System.out.printf("달을 입력하세요 : ");
+			System.out.println("--달을 입력하세요!!  *-1 입력시 종료*");
+			System.out.print(PROMPT);
 			inputMonth = scan.nextInt();		
-			
+			if(inputMonth == -1) {
+				System.out.println("-1 입력받음");
+				break;
+			}
+			else if(inputMonth > 12) {
+				System.out.println("1~12 사이의 값을 넣어주세요.");
+				continue;
+			}			
 			System.out.printf("%d월은 %d일까지 있습니다. \n\n", inputMonth, cal.getMaxDaysOfMonth(inputMonth));
+			
 		};
 		System.out.println("출력완료");
 		
