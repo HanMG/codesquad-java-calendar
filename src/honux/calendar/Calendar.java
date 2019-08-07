@@ -8,7 +8,7 @@ public class Calendar
 {
 	private static final int[]MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
-	public static int getMaxDaysOfMonth(int month) {
+	public  int getMaxDaysOfMonth(int month) {
 		return MAX_DAYS[month - 1];
 	}
 	
@@ -31,7 +31,7 @@ public class Calendar
 		System.out.println("달을 입력하세요.");
 		inputMonth = scan.nextInt();		
 		
-		System.out.printf("%d월은 %d일까지 있습니다. \n\n", inputMonth, getMaxDaysOfMonth(inputMonth));
+		System.out.printf("%d월은 %d일까지 있습니다. \n\n", inputMonth, cal.getMaxDaysOfMonth(inputMonth));
 		cal.printSampleCalendar();
 		scan.close();		
 	}
