@@ -4,8 +4,35 @@ import java.util.Scanner;
 
 public class Prompt
 {
-	
-	
+
+	public int parseDay(String week)
+	{
+		if (week.equals("일"))
+		{
+			return 0;
+		} else if (week.equals("월"))
+		{
+			return 1;
+		} else if (week.equals("화"))
+		{
+			return 2;
+		} else if (week.equals("수"))
+		{
+			return 3;
+		} else if (week.equals("목"))
+		{
+			return 4;
+		} else if (week.equals("금"))
+		{
+			return 5;
+		} else if (week.equals("토"))
+		{
+			return 6;
+		} else
+			return 0;
+
+	}
+
 	public void runPrompt()
 	{
 		Scanner scan = new Scanner(System.in);
@@ -13,13 +40,14 @@ public class Prompt
 
 		int inputMonth = 0;
 		int inputYear = 0;
+		int weekDay = 0;
 
 		while (true)
 		{
 			System.out.println("--연도를 입력하세요!!  *-1 입력시 종료*");
 			System.out.print("YEAR> ");
 			inputYear = scan.nextInt();
-			if(inputYear == -1) 
+			if (inputYear == -1)
 			{
 				break;
 			}
@@ -27,17 +55,23 @@ public class Prompt
 			System.out.print("MONTH> ");
 			inputMonth = scan.nextInt();
 			if (inputMonth == -1)
-			{				
+			{
 				break;
-			} 
-			else if (inputMonth > 12)
+			} else if (inputMonth > 12 || inputMonth < 1)
 			{
 				System.out.println("1~12 사이의 값을 넣어주세요.");
 				continue;
 			}
-			cal.printCalendar(inputYear, inputMonth);
 
-		};
+			System.out.println("--첫째 날의 요일을 입력하세요.(일, 월, 화, 수, 목, 금, 토)");
+			System.out.print("DAY> ");
+			String inputDay = scan.next();
+			weekDay = parseDay(inputDay);
+
+			cal.printCalendar(inputYear, inputMonth, weekDay);
+
+		}
+		;
 		System.out.println("-------출력종료-------");
 
 		scan.close();

@@ -20,35 +20,52 @@ public class Calendar
 
 	public int getMaxDaysOfMonth(int year, int month)
 	{
-		if(isLeapYear(year)) 
+		if (isLeapYear(year))
 		{
 			return LEAP_MAX_YEARS[month - 1];
-		}
-		else 
+		} else
 		{
 			return MAX_DAYS[month - 1];
 		}
 	}
-	
-	public boolean isLeapYear(int year) 
+
+	public boolean isLeapYear(int year)
 	{
-		if(year % 4 == 0 && (year % 100 != 0 || year % 400 != 0))
+		if (year % 4 == 0 && (year % 100 != 0 || year % 400 != 0))
 			return true;
 		else
 			return false;
 	}
 
-	public void printCalendar(int year, int month)
+	public void printCalendar(int year, int month, int weekday)
 	{
 		System.out.printf("     <<%4d년%3d월>>\n", year, month);
 		System.out.println("  일    월   화  수   목   금   토");
 		System.out.println("---------------------");
-		
+
+		// print blank space
+		for (int i = 0; i < weekday; i++)
+		{
+			System.out.print("   ");
+		}
 		int maxDay = getMaxDaysOfMonth(year, month);
-		for (int i = 1; i <= maxDay; i++)
+
+		int count = 7 - weekday;
+		int delim = (count < 7) ? count : 0;
+
+		// first line
+		for (int i = 1; i <= count; i++)
 		{
 			System.out.printf("%3d", i);
-			if (i % 7 == 0)
+		}
+
+		// print second line to last
+		System.out.println();
+		count++;
+		for (int i = count; i <= maxDay; i++)
+		{
+			System.out.printf("%3d", i);
+			if (i % 7 == delim)
 			{
 				System.out.println();
 			}
