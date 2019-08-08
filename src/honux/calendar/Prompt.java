@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Prompt
 {
-	private final String PROMPT = "cal> ";
+	
 	
 	public void runPrompt()
 	{
@@ -12,11 +12,19 @@ public class Prompt
 		Calendar cal = new Calendar();
 
 		int inputMonth = 0;
+		int inputYear = 0;
 
 		while (true)
 		{
+			System.out.println("--연도를 입력하세요!!  *-1 입력시 종료*");
+			System.out.print("YEAR> ");
+			inputYear = scan.nextInt();
+			if(inputYear == -1) 
+			{
+				break;
+			}
 			System.out.println("--달을 입력하세요!!  *-1 입력시 종료*");
-			System.out.print(PROMPT);
+			System.out.print("MONTH> ");
 			inputMonth = scan.nextInt();
 			if (inputMonth == -1)
 			{				
@@ -27,10 +35,10 @@ public class Prompt
 				System.out.println("1~12 사이의 값을 넣어주세요.");
 				continue;
 			}
-			cal.printCalendar(2019, inputMonth);
+			cal.printCalendar(inputYear, inputMonth);
 
 		};
-		System.out.println("출력완료");
+		System.out.println("-------출력종료-------");
 
 		scan.close();
 	}
