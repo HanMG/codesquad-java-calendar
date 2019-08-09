@@ -3,35 +3,7 @@ package honux.calendar;
 import java.util.Scanner;
 
 public class Prompt
-{
-
-	public int parseDay(String week)
-	{
-		if (week.equals("일"))
-		{
-			return 0;
-		} else if (week.equals("월"))
-		{
-			return 1;
-		} else if (week.equals("화"))
-		{
-			return 2;
-		} else if (week.equals("수"))
-		{
-			return 3;
-		} else if (week.equals("목"))
-		{
-			return 4;
-		} else if (week.equals("금"))
-		{
-			return 5;
-		} else if (week.equals("토"))
-		{
-			return 6;
-		} else
-			return 0;
-
-	}
+{	
 
 	public void runPrompt()
 	{
@@ -61,14 +33,9 @@ public class Prompt
 			{
 				System.out.println("1~12 사이의 값을 넣어주세요.");
 				continue;
-			}
+			}			
 
-			System.out.println("--첫째 날의 요일을 입력하세요.(일, 월, 화, 수, 목, 금, 토)");
-			System.out.print("DAY> ");
-			String inputDay = scan.next();
-			weekDay = parseDay(inputDay);
-
-			cal.printCalendar(inputYear, inputMonth, weekDay);
+			cal.printCalendar(inputYear, inputMonth);
 
 		}
 		;

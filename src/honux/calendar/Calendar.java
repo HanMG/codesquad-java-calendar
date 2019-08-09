@@ -13,19 +13,19 @@ package honux.calendar;
 public class Calendar
 {
 	private static final int[] MAX_DAYS =
-	{ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	private static final int[] LEAP_MAX_YEARS =
-	{ 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	public int getMaxDaysOfMonth(int year, int month)
 	{
 		if (isLeapYear(year))
 		{
-			return LEAP_MAX_YEARS[month - 1];
+			return LEAP_MAX_YEARS[month];
 		} else
 		{
-			return MAX_DAYS[month - 1];
+			return MAX_DAYS[month];
 		}
 	}
 
@@ -37,12 +37,15 @@ public class Calendar
 			return false;
 	}
 
-	public void printCalendar(int year, int month, int weekday)
+	public void printCalendar(int year, int month)
 	{
-		System.out.printf("     <<%4d년%3d월>>\n", year, month);
+		System.out.printf("     <<%d년 %d월>>\n", year, month);
 		System.out.println("  일    월   화  수   목   금   토");
 		System.out.println("---------------------");
 
+		// get weekday automatically
+		int weekday = getWeekDay(year, month, 1);
+		
 		// print blank space
 		for (int i = 0; i < weekday; i++)
 		{
@@ -70,12 +73,48 @@ public class Calendar
 				System.out.println();
 			}
 		}
-		System.out.println("\n");
+		System.out.println("\n");		
 	}
-
+	
+	private int getWeekDay(int year, int month, int day) 
+	{
+		int syear = 1970;		
+		/* int sday = 1; */
+		final int STANDARD_WEEKDAY = 3; //1970-01-01 = Thursday
+		
+		int count = 0;
+		
+		for( int i = syear; i < year; i++) 
+		{
+			int delta = isLeapYear(i) ? 366 : 365;
+			count += delta;
+			
+		}		
+		
+		for( int i = 1; i < month; i++) 
+		{
+			int delta = getMaxDaysOfMonth(year, i);
+			count += delta;
+		}
+		
+		count += day - 1;
+		
+		int weekday = (count + STANDARD_WEEKDAY) % 7;
+		
+		/* System.out.println(count); */
+		return weekday;
+	}
+	
 	public static void main(String[] args)
 	{
-
+		Calendar cal = new Calendar();
+		System.out.println(cal.getWeekDay(1970, 1, 1) == 3);
+		System.out.println(cal.getWeekDay(1971, 1, 1) == 4);
+		System.out.println(cal.getWeekDay(1972, 1, 1) == 5);
+		System.out.println(cal.getWeekDay(1973, 1, 1) == 0);
+		System.out.println(cal.getWeekDay(1974, 1, 1) == 1);		
+		
+		 
 	}
 
 }
