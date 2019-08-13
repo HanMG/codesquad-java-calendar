@@ -12,7 +12,7 @@ public class Prompt
 
 		int inputMonth = 0;
 		int inputYear = 0;
-		int weekDay = 0;
+		/* int weekDay = 0; */
 
 		while (true)
 		{

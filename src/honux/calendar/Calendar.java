@@ -13,11 +13,20 @@ package honux.calendar;
 public class Calendar
 {
 	private static final int[] MAX_DAYS =
-	{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	{ 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };	
 
 	private static final int[] LEAP_MAX_YEARS =
-	{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	{ 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };	
 
+	
+	public boolean isLeapYear(int year)
+	{
+		if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
+			return true;
+		else
+			return false;
+	}
+	
 	public int getMaxDaysOfMonth(int year, int month)
 	{
 		if (isLeapYear(year))
@@ -27,14 +36,6 @@ public class Calendar
 		{
 			return MAX_DAYS[month];
 		}
-	}
-
-	public boolean isLeapYear(int year)
-	{
-		if (year % 4 == 0 && (year % 100 != 0 || year % 400 != 0))
-			return true;
-		else
-			return false;
 	}
 
 	public void printCalendar(int year, int month)
@@ -97,7 +98,7 @@ public class Calendar
 			count += delta;
 		}
 		
-		count += day - 1;
+		count += day;
 		
 		int weekday = (count + STANDARD_WEEKDAY) % 7;
 		
